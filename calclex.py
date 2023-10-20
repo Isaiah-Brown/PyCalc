@@ -5,7 +5,7 @@ import ply.lex as lex
 
 tokens = (
     'NAME','NUMBER',
-    'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
+    'PLUS','MINUS','TIMES','DIVIDE', 'POWER', 'EQUALS',
     'LPAREN','RPAREN',
     )
 
@@ -15,6 +15,7 @@ t_PLUS    = r'\+'
 t_MINUS   = r'-'
 t_TIMES   = r'\*'
 t_DIVIDE  = r'/'
+t_POWER   = r'\^'
 t_EQUALS  = r'='
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
@@ -68,7 +69,7 @@ def t_NUMBER(t):
         except ValueError:
             print("Cannot parse the number: %s" % t.value)
             t.value = 0
-            
+
     return t
 
 t_ignore = " \t"

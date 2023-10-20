@@ -25,6 +25,10 @@ def p_term_div(p):
     'term : term DIVIDE factor'
     p[0] = p[1] / p[3]
 
+def p_term_pow(p):
+    'term : term POWER factor'
+    p[0] = pow(p[1], p[3])
+
 def p_term_factor(p):
     'term : factor'
     p[0] = p[1]

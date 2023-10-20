@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'DIVIDE EQUALS LPAREN MINUS NAME NUMBER PLUS RPAREN TIMESexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN'
+_lr_signature = 'DIVIDE EQUALS LPAREN MINUS NAME NUMBER PLUS POWER RPAREN TIMESexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : term POWER factorterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN'
     
-_lr_action_items = {'NUMBER':([0,5,6,7,8,9,],[4,4,4,4,4,4,]),'LPAREN':([0,5,6,7,8,9,],[5,5,5,5,5,5,]),'$end':([1,2,3,4,11,12,13,14,15,],[0,-3,-6,-7,-1,-2,-4,-5,-8,]),'PLUS':([1,2,3,4,10,11,12,13,14,15,],[6,-3,-6,-7,6,-1,-2,-4,-5,-8,]),'MINUS':([1,2,3,4,10,11,12,13,14,15,],[7,-3,-6,-7,7,-1,-2,-4,-5,-8,]),'RPAREN':([2,3,4,10,11,12,13,14,15,],[-3,-6,-7,15,-1,-2,-4,-5,-8,]),'TIMES':([2,3,4,11,12,13,14,15,],[8,-6,-7,8,8,-4,-5,-8,]),'DIVIDE':([2,3,4,11,12,13,14,15,],[9,-6,-7,9,9,-4,-5,-8,]),}
+_lr_action_items = {'NUMBER':([0,5,6,7,8,9,10,],[4,4,4,4,4,4,4,]),'LPAREN':([0,5,6,7,8,9,10,],[5,5,5,5,5,5,5,]),'$end':([1,2,3,4,12,13,14,15,16,17,],[0,-3,-7,-8,-1,-2,-4,-5,-6,-9,]),'PLUS':([1,2,3,4,11,12,13,14,15,16,17,],[6,-3,-7,-8,6,-1,-2,-4,-5,-6,-9,]),'MINUS':([1,2,3,4,11,12,13,14,15,16,17,],[7,-3,-7,-8,7,-1,-2,-4,-5,-6,-9,]),'RPAREN':([2,3,4,11,12,13,14,15,16,17,],[-3,-7,-8,17,-1,-2,-4,-5,-6,-9,]),'TIMES':([2,3,4,12,13,14,15,16,17,],[8,-7,-8,8,8,-4,-5,-6,-9,]),'DIVIDE':([2,3,4,12,13,14,15,16,17,],[9,-7,-8,9,9,-4,-5,-6,-9,]),'POWER':([2,3,4,12,13,14,15,16,17,],[10,-7,-8,10,10,-4,-5,-6,-9,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,5,],[1,10,]),'term':([0,5,6,7,],[2,2,11,12,]),'factor':([0,5,6,7,8,9,],[3,3,3,3,13,14,]),}
+_lr_goto_items = {'expression':([0,5,],[1,11,]),'term':([0,5,6,7,],[2,2,12,13,]),'factor':([0,5,6,7,8,9,10,],[3,3,3,3,14,15,16,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -32,7 +32,8 @@ _lr_productions = [
   ('expression -> term','expression',1,'p_expression_term','calcparse.py',17),
   ('term -> term TIMES factor','term',3,'p_term_times','calcparse.py',21),
   ('term -> term DIVIDE factor','term',3,'p_term_div','calcparse.py',25),
-  ('term -> factor','term',1,'p_term_factor','calcparse.py',29),
-  ('factor -> NUMBER','factor',1,'p_factor_num','calcparse.py',33),
-  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','calcparse.py',37),
+  ('term -> term POWER factor','term',3,'p_term_pow','calcparse.py',29),
+  ('term -> factor','term',1,'p_term_factor','calcparse.py',33),
+  ('factor -> NUMBER','factor',1,'p_factor_num','calcparse.py',37),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','calcparse.py',41),
 ]
