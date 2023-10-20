@@ -21,12 +21,54 @@ t_RPAREN  = r'\)'
 t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
 def t_NUMBER(t):
-    r'\d+'
-    try:
-        t.value = int(t.value)
-    except ValueError:
-        print("Integer value too large %s" % t.value)
-        t.value = 0
+    r'(\d+)?[\.bx]?[0-9A-F]+'
+    t_string = str(t.value)
+
+    if '0b' == t_string[0:2]:
+        binary_number = t_string[2:]
+        num = 0
+
+        for i in reversed(range(len(binary_number))):
+            try:
+                value = int(binary_number[i])
+            except ValueError:
+                print("Binary representation error %s" % t.value)
+                t.value = 0
+                return t
+            if value == 1:
+                base = pow(2, i) 
+                num += base
+
+        t.value = num
+        return t
+   
+    elif '0x' == t_string[0:2]:
+        hex_number = t_string[2:]
+        alphabet = ['A', 'B', 'C', 'D', 'E', 'F']
+        num = 0
+        for i in reversed(range(len(hex_number))):
+            value = hex_number[i]
+            base = pow(16, i)
+            if value in alphabet:
+                num += base * (10 + alphabet.index(value))
+            else:
+                num += base * (int(value))
+        t.value = num
+        return t
+
+    elif '.' in t_string:
+        try: 
+            t.value = float(t.value)
+        except ValueError:
+            print("Float representation error %s" % t.value)
+
+    else:
+        try:
+            t.value = int(t.value)
+        except ValueError:
+            print("Cannot parse the number: %s" % t.value)
+            t.value = 0
+            
     return t
 
 t_ignore = " \t"
@@ -54,6 +96,7 @@ def test(data):
         print(tok)
 
 if __name__ == "__main__":
+    print(float(.34))
     test_str = input("lex_test > ")
     while test_str != "":
         test(test_str)
