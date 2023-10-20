@@ -4,32 +4,34 @@
 import ply.lex as lex
 
 tokens = (
-    'NAME','NUMBER',
-    'PLUS','MINUS','TIMES','DIVIDE', 'POWER', 'EQUALS',
+    'NUMBER',
+    'PLUS','MINUS','TIMES','DIVIDE', 'POWER', 'FACTORIAL', 'SIN', 'COS', 'EQUALS',
     'LPAREN','RPAREN',
     )
 
 # Tokens
 
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
-t_POWER   = r'\^'
-t_EQUALS  = r'='
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
-t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
+t_PLUS      = r'\+'
+t_MINUS     = r'-'
+t_TIMES     = r'\*'
+t_DIVIDE    = r'/'
+t_POWER     = r'\^'
+t_FACTORIAL = r'\!'
+t_SIN       = r'sin'
+t_COS       = r'cos'
+t_EQUALS    = r'='
+t_LPAREN    = r'\('
+t_RPAREN    = r'\)'
 
 def t_NUMBER(t):
     r'(\d+)?[\.bx]?[0-9A-F]+'
     t_string = str(t.value)
 
     if '0b' == t_string[0:2]:
-        binary_number = t_string[2:]
+        binary_number = t_string[2:][::-1]
         num = 0
 
-        for i in reversed(range(len(binary_number))):
+        for i in range(len(binary_number)):
             try:
                 value = int(binary_number[i])
             except ValueError:
@@ -44,10 +46,10 @@ def t_NUMBER(t):
         return t
    
     elif '0x' == t_string[0:2]:
-        hex_number = t_string[2:]
+        hex_number = t_string[2:][::-1]
         alphabet = ['A', 'B', 'C', 'D', 'E', 'F']
         num = 0
-        for i in reversed(range(len(hex_number))):
+        for i in range(len(hex_number)):
             value = hex_number[i]
             base = pow(16, i)
             if value in alphabet:
@@ -97,7 +99,6 @@ def test(data):
         print(tok)
 
 if __name__ == "__main__":
-    print(float(.34))
     test_str = input("lex_test > ")
     while test_str != "":
         test(test_str)

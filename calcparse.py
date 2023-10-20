@@ -1,3 +1,4 @@
+import math
 # Yacc example
 
 import ply.yacc as yacc
@@ -28,6 +29,23 @@ def p_term_div(p):
 def p_term_pow(p):
     'term : term POWER factor'
     p[0] = pow(p[1], p[3])
+
+def p_term_factorial(p):
+    'term : term FACTORIAL'
+    num = int(p[1])
+    output = 1
+    while num != 0:
+        output *= num
+        num -= 1
+    p[0] = output
+    
+def p_term_sin(p):
+    'term : SIN term'
+    p[0] = math.sin(float(p[2]))
+
+def p_term_cos(p):
+    'term : COS term'
+    p[0] = math.cos(float(p[2]))
 
 def p_term_factor(p):
     'term : factor'

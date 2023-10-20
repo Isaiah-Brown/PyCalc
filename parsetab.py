@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'DIVIDE EQUALS LPAREN MINUS NAME NUMBER PLUS POWER RPAREN TIMESexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : term POWER factorterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN'
+_lr_signature = 'COS DIVIDE EQUALS FACTORIAL LPAREN MINUS NUMBER PLUS POWER RPAREN SIN TIMESexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : term POWER factorterm : term FACTORIALterm : SIN termterm : COS termterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN'
     
-_lr_action_items = {'NUMBER':([0,5,6,7,8,9,10,],[4,4,4,4,4,4,4,]),'LPAREN':([0,5,6,7,8,9,10,],[5,5,5,5,5,5,5,]),'$end':([1,2,3,4,12,13,14,15,16,17,],[0,-3,-7,-8,-1,-2,-4,-5,-6,-9,]),'PLUS':([1,2,3,4,11,12,13,14,15,16,17,],[6,-3,-7,-8,6,-1,-2,-4,-5,-6,-9,]),'MINUS':([1,2,3,4,11,12,13,14,15,16,17,],[7,-3,-7,-8,7,-1,-2,-4,-5,-6,-9,]),'RPAREN':([2,3,4,11,12,13,14,15,16,17,],[-3,-7,-8,17,-1,-2,-4,-5,-6,-9,]),'TIMES':([2,3,4,12,13,14,15,16,17,],[8,-7,-8,8,8,-4,-5,-6,-9,]),'DIVIDE':([2,3,4,12,13,14,15,16,17,],[9,-7,-8,9,9,-4,-5,-6,-9,]),'POWER':([2,3,4,12,13,14,15,16,17,],[10,-7,-8,10,10,-4,-5,-6,-9,]),}
+_lr_action_items = {'SIN':([0,4,5,7,8,9,],[4,4,4,4,4,4,]),'COS':([0,4,5,7,8,9,],[5,5,5,5,5,5,]),'NUMBER':([0,4,5,7,8,9,10,11,12,],[6,6,6,6,6,6,6,6,6,]),'LPAREN':([0,4,5,7,8,9,10,11,12,],[7,7,7,7,7,7,7,7,7,]),'$end':([1,2,3,6,13,14,15,17,18,19,20,21,22,],[0,-3,-10,-11,-7,-8,-9,-1,-2,-4,-5,-6,-12,]),'PLUS':([1,2,3,6,13,14,15,16,17,18,19,20,21,22,],[8,-3,-10,-11,-7,-8,-9,8,-1,-2,-4,-5,-6,-12,]),'MINUS':([1,2,3,6,13,14,15,16,17,18,19,20,21,22,],[9,-3,-10,-11,-7,-8,-9,9,-1,-2,-4,-5,-6,-12,]),'RPAREN':([2,3,6,13,14,15,16,17,18,19,20,21,22,],[-3,-10,-11,-7,-8,-9,22,-1,-2,-4,-5,-6,-12,]),'TIMES':([2,3,6,13,14,15,17,18,19,20,21,22,],[10,-10,-11,-7,10,10,10,10,-4,-5,-6,-12,]),'DIVIDE':([2,3,6,13,14,15,17,18,19,20,21,22,],[11,-10,-11,-7,11,11,11,11,-4,-5,-6,-12,]),'POWER':([2,3,6,13,14,15,17,18,19,20,21,22,],[12,-10,-11,-7,12,12,12,12,-4,-5,-6,-12,]),'FACTORIAL':([2,3,6,13,14,15,17,18,19,20,21,22,],[13,-10,-11,-7,13,13,13,13,-4,-5,-6,-12,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,5,],[1,11,]),'term':([0,5,6,7,],[2,2,12,13,]),'factor':([0,5,6,7,8,9,10,],[3,3,3,3,14,15,16,]),}
+_lr_goto_items = {'expression':([0,7,],[1,16,]),'term':([0,4,5,7,8,9,],[2,14,15,2,17,18,]),'factor':([0,4,5,7,8,9,10,11,12,],[3,3,3,3,3,3,19,20,21,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,13 +27,16 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expression PLUS term','expression',3,'p_expression_plus','calcparse.py',9),
-  ('expression -> expression MINUS term','expression',3,'p_expression_minus','calcparse.py',13),
-  ('expression -> term','expression',1,'p_expression_term','calcparse.py',17),
-  ('term -> term TIMES factor','term',3,'p_term_times','calcparse.py',21),
-  ('term -> term DIVIDE factor','term',3,'p_term_div','calcparse.py',25),
-  ('term -> term POWER factor','term',3,'p_term_pow','calcparse.py',29),
-  ('term -> factor','term',1,'p_term_factor','calcparse.py',33),
-  ('factor -> NUMBER','factor',1,'p_factor_num','calcparse.py',37),
-  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','calcparse.py',41),
+  ('expression -> expression PLUS term','expression',3,'p_expression_plus','calcparse.py',10),
+  ('expression -> expression MINUS term','expression',3,'p_expression_minus','calcparse.py',14),
+  ('expression -> term','expression',1,'p_expression_term','calcparse.py',18),
+  ('term -> term TIMES factor','term',3,'p_term_times','calcparse.py',22),
+  ('term -> term DIVIDE factor','term',3,'p_term_div','calcparse.py',26),
+  ('term -> term POWER factor','term',3,'p_term_pow','calcparse.py',30),
+  ('term -> term FACTORIAL','term',2,'p_term_factorial','calcparse.py',34),
+  ('term -> SIN term','term',2,'p_term_sin','calcparse.py',44),
+  ('term -> COS term','term',2,'p_term_cos','calcparse.py',48),
+  ('term -> factor','term',1,'p_term_factor','calcparse.py',52),
+  ('factor -> NUMBER','factor',1,'p_factor_num','calcparse.py',56),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','calcparse.py',60),
 ]
