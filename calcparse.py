@@ -40,11 +40,11 @@ def p_term_factorial(p):
     p[0] = output
     
 def p_term_sin(p):
-    'term : SIN term'
+    'factor : SIN term'
     p[0] = math.sin(float(p[2]))
 
 def p_term_cos(p):
-    'term : COS term'
+    'factor : COS term'
     p[0] = math.cos(float(p[2]))
 
 def p_term_factor(p):

@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'COS DIVIDE EQUALS FACTORIAL LPAREN MINUS NUMBER PLUS POWER RPAREN SIN TIMESexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : term POWER factorterm : term FACTORIALterm : SIN termterm : COS termterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN'
+_lr_signature = 'COS DIVIDE EQUALS FACTORIAL LPAREN MINUS NUMBER PLUS POWER RPAREN SIN TIMESexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : term POWER factorterm : term FACTORIALfactor : SIN termfactor : COS termterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN'
     
-_lr_action_items = {'SIN':([0,4,5,7,8,9,],[4,4,4,4,4,4,]),'COS':([0,4,5,7,8,9,],[5,5,5,5,5,5,]),'NUMBER':([0,4,5,7,8,9,10,11,12,],[6,6,6,6,6,6,6,6,6,]),'LPAREN':([0,4,5,7,8,9,10,11,12,],[7,7,7,7,7,7,7,7,7,]),'$end':([1,2,3,6,13,14,15,17,18,19,20,21,22,],[0,-3,-10,-11,-7,-8,-9,-1,-2,-4,-5,-6,-12,]),'PLUS':([1,2,3,6,13,14,15,16,17,18,19,20,21,22,],[8,-3,-10,-11,-7,-8,-9,8,-1,-2,-4,-5,-6,-12,]),'MINUS':([1,2,3,6,13,14,15,16,17,18,19,20,21,22,],[9,-3,-10,-11,-7,-8,-9,9,-1,-2,-4,-5,-6,-12,]),'RPAREN':([2,3,6,13,14,15,16,17,18,19,20,21,22,],[-3,-10,-11,-7,-8,-9,22,-1,-2,-4,-5,-6,-12,]),'TIMES':([2,3,6,13,14,15,17,18,19,20,21,22,],[10,-10,-11,-7,10,10,10,10,-4,-5,-6,-12,]),'DIVIDE':([2,3,6,13,14,15,17,18,19,20,21,22,],[11,-10,-11,-7,11,11,11,11,-4,-5,-6,-12,]),'POWER':([2,3,6,13,14,15,17,18,19,20,21,22,],[12,-10,-11,-7,12,12,12,12,-4,-5,-6,-12,]),'FACTORIAL':([2,3,6,13,14,15,17,18,19,20,21,22,],[13,-10,-11,-7,13,13,13,13,-4,-5,-6,-12,]),}
+_lr_action_items = {'SIN':([0,4,5,7,8,9,10,11,12,],[4,4,4,4,4,4,4,4,4,]),'COS':([0,4,5,7,8,9,10,11,12,],[5,5,5,5,5,5,5,5,5,]),'NUMBER':([0,4,5,7,8,9,10,11,12,],[6,6,6,6,6,6,6,6,6,]),'LPAREN':([0,4,5,7,8,9,10,11,12,],[7,7,7,7,7,7,7,7,7,]),'$end':([1,2,3,6,13,14,15,17,18,19,20,21,22,],[0,-3,-10,-11,-7,-8,-9,-1,-2,-4,-5,-6,-12,]),'PLUS':([1,2,3,6,13,14,15,16,17,18,19,20,21,22,],[8,-3,-10,-11,-7,-8,-9,8,-1,-2,-4,-5,-6,-12,]),'MINUS':([1,2,3,6,13,14,15,16,17,18,19,20,21,22,],[9,-3,-10,-11,-7,-8,-9,9,-1,-2,-4,-5,-6,-12,]),'RPAREN':([2,3,6,13,14,15,16,17,18,19,20,21,22,],[-3,-10,-11,-7,-8,-9,22,-1,-2,-4,-5,-6,-12,]),'TIMES':([2,3,6,13,14,15,17,18,19,20,21,22,],[10,-10,-11,-7,10,10,10,10,-4,-5,-6,-12,]),'DIVIDE':([2,3,6,13,14,15,17,18,19,20,21,22,],[11,-10,-11,-7,11,11,11,11,-4,-5,-6,-12,]),'POWER':([2,3,6,13,14,15,17,18,19,20,21,22,],[12,-10,-11,-7,12,12,12,12,-4,-5,-6,-12,]),'FACTORIAL':([2,3,6,13,14,15,17,18,19,20,21,22,],[13,-10,-11,-7,13,13,13,13,-4,-5,-6,-12,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -34,9 +34,9 @@ _lr_productions = [
   ('term -> term DIVIDE factor','term',3,'p_term_div','calcparse.py',26),
   ('term -> term POWER factor','term',3,'p_term_pow','calcparse.py',30),
   ('term -> term FACTORIAL','term',2,'p_term_factorial','calcparse.py',34),
-  ('term -> SIN term','term',2,'p_term_sin','calcparse.py',44),
-  ('term -> COS term','term',2,'p_term_cos','calcparse.py',48),
-  ('term -> factor','term',1,'p_term_factor','calcparse.py',52),
-  ('factor -> NUMBER','factor',1,'p_factor_num','calcparse.py',56),
-  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','calcparse.py',60),
+  ('factor -> SIN term','factor',2,'p_term_sin','calcparse.py',43),
+  ('factor -> COS term','factor',2,'p_term_cos','calcparse.py',47),
+  ('term -> factor','term',1,'p_term_factor','calcparse.py',51),
+  ('factor -> NUMBER','factor',1,'p_factor_num','calcparse.py',55),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','calcparse.py',59),
 ]

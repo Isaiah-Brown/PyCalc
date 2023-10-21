@@ -14,8 +14,8 @@ Rule 4     term -> term TIMES factor
 Rule 5     term -> term DIVIDE factor
 Rule 6     term -> term POWER factor
 Rule 7     term -> term FACTORIAL
-Rule 8     term -> SIN term
-Rule 9     term -> COS term
+Rule 8     factor -> SIN term
+Rule 9     factor -> COS term
 Rule 10    term -> factor
 Rule 11    factor -> NUMBER
 Rule 12    factor -> LPAREN expression RPAREN
@@ -54,9 +54,9 @@ state 0
     (5) term -> . term DIVIDE factor
     (6) term -> . term POWER factor
     (7) term -> . term FACTORIAL
-    (8) term -> . SIN term
-    (9) term -> . COS term
     (10) term -> . factor
+    (8) factor -> . SIN term
+    (9) factor -> . COS term
     (11) factor -> . NUMBER
     (12) factor -> . LPAREN expression RPAREN
 
@@ -113,14 +113,14 @@ state 3
 
 state 4
 
-    (8) term -> SIN . term
+    (8) factor -> SIN . term
     (4) term -> . term TIMES factor
     (5) term -> . term DIVIDE factor
     (6) term -> . term POWER factor
     (7) term -> . term FACTORIAL
-    (8) term -> . SIN term
-    (9) term -> . COS term
     (10) term -> . factor
+    (8) factor -> . SIN term
+    (9) factor -> . COS term
     (11) factor -> . NUMBER
     (12) factor -> . LPAREN expression RPAREN
 
@@ -134,14 +134,14 @@ state 4
 
 state 5
 
-    (9) term -> COS . term
+    (9) factor -> COS . term
     (4) term -> . term TIMES factor
     (5) term -> . term DIVIDE factor
     (6) term -> . term POWER factor
     (7) term -> . term FACTORIAL
-    (8) term -> . SIN term
-    (9) term -> . COS term
     (10) term -> . factor
+    (8) factor -> . SIN term
+    (9) factor -> . COS term
     (11) factor -> . NUMBER
     (12) factor -> . LPAREN expression RPAREN
 
@@ -177,9 +177,9 @@ state 7
     (5) term -> . term DIVIDE factor
     (6) term -> . term POWER factor
     (7) term -> . term FACTORIAL
-    (8) term -> . SIN term
-    (9) term -> . COS term
     (10) term -> . factor
+    (8) factor -> . SIN term
+    (9) factor -> . COS term
     (11) factor -> . NUMBER
     (12) factor -> . LPAREN expression RPAREN
 
@@ -199,9 +199,9 @@ state 8
     (5) term -> . term DIVIDE factor
     (6) term -> . term POWER factor
     (7) term -> . term FACTORIAL
-    (8) term -> . SIN term
-    (9) term -> . COS term
     (10) term -> . factor
+    (8) factor -> . SIN term
+    (9) factor -> . COS term
     (11) factor -> . NUMBER
     (12) factor -> . LPAREN expression RPAREN
 
@@ -220,9 +220,9 @@ state 9
     (5) term -> . term DIVIDE factor
     (6) term -> . term POWER factor
     (7) term -> . term FACTORIAL
-    (8) term -> . SIN term
-    (9) term -> . COS term
     (10) term -> . factor
+    (8) factor -> . SIN term
+    (9) factor -> . COS term
     (11) factor -> . NUMBER
     (12) factor -> . LPAREN expression RPAREN
 
@@ -237,9 +237,13 @@ state 9
 state 10
 
     (4) term -> term TIMES . factor
+    (8) factor -> . SIN term
+    (9) factor -> . COS term
     (11) factor -> . NUMBER
     (12) factor -> . LPAREN expression RPAREN
 
+    SIN             shift and go to state 4
+    COS             shift and go to state 5
     NUMBER          shift and go to state 6
     LPAREN          shift and go to state 7
 
@@ -248,9 +252,13 @@ state 10
 state 11
 
     (5) term -> term DIVIDE . factor
+    (8) factor -> . SIN term
+    (9) factor -> . COS term
     (11) factor -> . NUMBER
     (12) factor -> . LPAREN expression RPAREN
 
+    SIN             shift and go to state 4
+    COS             shift and go to state 5
     NUMBER          shift and go to state 6
     LPAREN          shift and go to state 7
 
@@ -259,9 +267,13 @@ state 11
 state 12
 
     (6) term -> term POWER . factor
+    (8) factor -> . SIN term
+    (9) factor -> . COS term
     (11) factor -> . NUMBER
     (12) factor -> . LPAREN expression RPAREN
 
+    SIN             shift and go to state 4
+    COS             shift and go to state 5
     NUMBER          shift and go to state 6
     LPAREN          shift and go to state 7
 
@@ -283,7 +295,7 @@ state 13
 
 state 14
 
-    (8) term -> SIN term .
+    (8) factor -> SIN term .
     (4) term -> term . TIMES factor
     (5) term -> term . DIVIDE factor
     (6) term -> term . POWER factor
@@ -293,24 +305,24 @@ state 14
   ! shift/reduce conflict for DIVIDE resolved as shift
   ! shift/reduce conflict for POWER resolved as shift
   ! shift/reduce conflict for FACTORIAL resolved as shift
-    PLUS            reduce using rule 8 (term -> SIN term .)
-    MINUS           reduce using rule 8 (term -> SIN term .)
-    $end            reduce using rule 8 (term -> SIN term .)
-    RPAREN          reduce using rule 8 (term -> SIN term .)
+    PLUS            reduce using rule 8 (factor -> SIN term .)
+    MINUS           reduce using rule 8 (factor -> SIN term .)
+    $end            reduce using rule 8 (factor -> SIN term .)
+    RPAREN          reduce using rule 8 (factor -> SIN term .)
     TIMES           shift and go to state 10
     DIVIDE          shift and go to state 11
     POWER           shift and go to state 12
     FACTORIAL       shift and go to state 13
 
-  ! TIMES           [ reduce using rule 8 (term -> SIN term .) ]
-  ! DIVIDE          [ reduce using rule 8 (term -> SIN term .) ]
-  ! POWER           [ reduce using rule 8 (term -> SIN term .) ]
-  ! FACTORIAL       [ reduce using rule 8 (term -> SIN term .) ]
+  ! TIMES           [ reduce using rule 8 (factor -> SIN term .) ]
+  ! DIVIDE          [ reduce using rule 8 (factor -> SIN term .) ]
+  ! POWER           [ reduce using rule 8 (factor -> SIN term .) ]
+  ! FACTORIAL       [ reduce using rule 8 (factor -> SIN term .) ]
 
 
 state 15
 
-    (9) term -> COS term .
+    (9) factor -> COS term .
     (4) term -> term . TIMES factor
     (5) term -> term . DIVIDE factor
     (6) term -> term . POWER factor
@@ -320,19 +332,19 @@ state 15
   ! shift/reduce conflict for DIVIDE resolved as shift
   ! shift/reduce conflict for POWER resolved as shift
   ! shift/reduce conflict for FACTORIAL resolved as shift
-    PLUS            reduce using rule 9 (term -> COS term .)
-    MINUS           reduce using rule 9 (term -> COS term .)
-    $end            reduce using rule 9 (term -> COS term .)
-    RPAREN          reduce using rule 9 (term -> COS term .)
+    PLUS            reduce using rule 9 (factor -> COS term .)
+    MINUS           reduce using rule 9 (factor -> COS term .)
+    $end            reduce using rule 9 (factor -> COS term .)
+    RPAREN          reduce using rule 9 (factor -> COS term .)
     TIMES           shift and go to state 10
     DIVIDE          shift and go to state 11
     POWER           shift and go to state 12
     FACTORIAL       shift and go to state 13
 
-  ! TIMES           [ reduce using rule 9 (term -> COS term .) ]
-  ! DIVIDE          [ reduce using rule 9 (term -> COS term .) ]
-  ! POWER           [ reduce using rule 9 (term -> COS term .) ]
-  ! FACTORIAL       [ reduce using rule 9 (term -> COS term .) ]
+  ! TIMES           [ reduce using rule 9 (factor -> COS term .) ]
+  ! DIVIDE          [ reduce using rule 9 (factor -> COS term .) ]
+  ! POWER           [ reduce using rule 9 (factor -> COS term .) ]
+  ! FACTORIAL       [ reduce using rule 9 (factor -> COS term .) ]
 
 
 state 16
